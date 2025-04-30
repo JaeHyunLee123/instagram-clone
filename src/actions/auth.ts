@@ -9,13 +9,13 @@ interface RegisterData {
   password: string;
 }
 
-type message = "OK" | "UNKOWN_ERROR" | "EMAIL_DUPLICATE";
+type registerUserCode = "OK" | "UNKOWN_ERROR" | "EMAIL_DUPLICATE";
 
-export async function register({
+export async function registerUser({
   email,
   nickname,
   password,
-}: RegisterData): Promise<{ message: message }> {
+}: RegisterData): Promise<{ code: registerUserCode }> {
   try {
     const isExist = await prisma.user.findUnique({
       where: {
@@ -26,7 +26,7 @@ export async function register({
       },
     });
 
-    if (isExist) return { message: "EMAIL_DUPLICATE" };
+    if (isExist) return { code: "EMAIL_DUPLICATE" };
 
     const hashedPassword = await bcrypt.hash(password, 5);
 
@@ -38,7 +38,7 @@ export async function register({
       },
     });
 
-    return { message: "OK" };
+    return { code: "OK" };
   } catch (e) {
     if (e instanceof Error) {
       console.error(e.message);
@@ -46,6 +46,6 @@ export async function register({
       console.error(e);
     }
 
-    return { message: "UNKOWN_ERROR" };
+    return { code: "UNKOWN_ERROR" };
   }
 }

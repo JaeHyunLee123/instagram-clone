@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-regular-svg-icons/faEye";
 import { faEyeSlash } from "@fortawesome/free-regular-svg-icons/faEyeSlash";
+import AuthInput from "./ui/AuthInput";
 
 interface FormData {
   email: string;
@@ -21,21 +22,12 @@ const RegisterForm = () => {
 
   return (
     <form className="flex flex-col space-y-2 w-full max-w-sm">
-      <input
-        placeholder="Email"
-        type="email"
-        className="bg-white placeholder:text-neutral-400 rounded p-2 w-full focus:outline-none focus:ring-3 focus: ring-blue-400"
-      />
-      <input
-        placeholder="Nickname"
-        type="text"
-        className="bg-white placeholder:text-neutral-400 rounded p-2 w-full focus:outline-none focus:ring-3 focus: ring-blue-400"
-      />
+      <AuthInput placeholder="Email" type="email" />
+      <AuthInput placeholder="Nickname" type="text" />
       <div className="flex items-center space-x-2">
-        <input
+        <AuthInput
           placeholder="Password"
           type={isPasswordVisible ? "text" : "password"}
-          className="bg-white placeholder:text-neutral-400 rounded p-2 w-full focus:outline-none focus:ring-3 focus: ring-blue-400"
         />
         <button
           type="button"
@@ -52,10 +44,9 @@ const RegisterForm = () => {
         </button>
       </div>
       <div className="flex items-center space-x-2">
-        <input
+        <AuthInput
           placeholder="Password Confirmation"
           type={isPasswordConfirmationVisible ? "text" : "password"}
-          className="bg-white placeholder:text-neutral-400 rounded p-2 w-full focus:outline-none focus:ring-3 focus: ring-blue-400"
         />
         <button
           type="button"
