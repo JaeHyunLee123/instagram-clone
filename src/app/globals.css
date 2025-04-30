@@ -4,3 +4,14 @@
   --background: oklch(98.5% 0 0);
   --foreground: oklch(14.5% 0 0);
 }
+
+.bg-insta-gradiant {
+  background: linear-gradient(
+    45deg,
+    #facc15,
+    #fb923c,
+    #ec4899,
+    #a855f7,
+    #4f46e5
+  );
+}
