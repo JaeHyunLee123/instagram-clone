@@ -11,7 +11,7 @@ datasource db {
 
 generator client {
   provider = "prisma-client-js"
-  output   = "./generated"
+  output   = "../src/generated/prisma/client"
 }
 
 model Post {
