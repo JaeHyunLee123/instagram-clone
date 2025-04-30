@@ -62,5 +62,5 @@ docker compose exec web npx prisma migrate dev --name init
 ### Prisma studio
 
 ```
-docker compose exec web npx prisma generate
+docker compose exec web npx prisma studio
 ```
