@@ -1,7 +1,7 @@
 "use server";
 
 import { createSession } from "@/lib/session";
-import prisma from "@/provider/prisma";
+import prisma from "@/lib/prisma";
 import bcrypt from "bcrypt";
 
 interface RegisterData {
