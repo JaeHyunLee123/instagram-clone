@@ -31,13 +31,15 @@ export async function registerUser({
 
     const hashedPassword = await bcrypt.hash(password, 5);
 
-    await prisma.user.create({
+    const newUser = await prisma.user.create({
       data: {
         email,
         nickname,
         password: hashedPassword,
       },
     });
+
+    await createSession({ userid: newUser.id, email: newUser.email });
 
     return { code: "OK" };
   } catch (e) {

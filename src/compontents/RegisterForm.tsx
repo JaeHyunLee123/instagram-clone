@@ -10,6 +10,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
 import { registerUser } from "@/actions/auth";
+import { useRouter } from "next/navigation";
 
 const registerSchema = z
   .object({
@@ -41,10 +42,13 @@ const RegisterForm = () => {
   const [isPasswordConfirmationVisible, setIsPasswordConfirmationVisible] =
     useState(false);
 
+  const router = useRouter();
+
   const { mutate, isPending } = useMutation({
     mutationFn: registerUser,
     onSuccess: (data) => {
       if (data.code === "OK") {
+        router.push("/");
       } else if (data.code === "EMAIL_DUPLICATE") {
       } else {
       }
