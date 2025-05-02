@@ -44,3 +44,20 @@ export async function deleteSession() {
   const cookieStore = await cookies();
   cookieStore.delete("session");
 }
+
+export async function getSession(): Promise<SessionPayload | null> {
+  const cookieStore = await cookies();
+  const session = cookieStore.get("session")?.value;
+
+  if (!session) {
+    return null;
+  }
+
+  try {
+    const payload = await decrypt(session);
+    return payload as SessionPayload;
+  } catch (error) {
+    console.error("Invalid session token:", error);
+    return null;
+  }
+}
