@@ -63,7 +63,7 @@ type EMAIL_LOGIN_CODE =
   | "SOCIAL_USER"
   | "INCORRECT_PASSWORD";
 
-export async function EmailLogin({
+export async function emailLogin({
   email,
   password,
 }: EmailLoginData): Promise<{ code: EMAIL_LOGIN_CODE }> {
