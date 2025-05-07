@@ -39,7 +39,11 @@ export async function registerUser({
       },
     });
 
-    await createSession({ userid: newUser.id, email: newUser.email });
+    await createSession({
+      userid: newUser.id,
+      email: newUser.email,
+      nickname: newUser.nickname,
+    });
 
     return { code: "OK" };
   } catch (e) {
@@ -88,7 +92,11 @@ export async function emailLogin({
       return { code: "INCORRECT_PASSWORD" };
     }
 
-    await createSession({ userid: user.id, email: user.email });
+    await createSession({
+      userid: user.id,
+      email: user.email,
+      nickname: user.nickname,
+    });
 
     return { code: "OK" };
   } catch (e) {
