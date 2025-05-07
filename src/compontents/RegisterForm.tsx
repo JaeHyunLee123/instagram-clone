@@ -11,6 +11,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
 import { registerUser } from "@/actions/auth";
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 const registerSchema = z
   .object({
@@ -48,12 +49,28 @@ const RegisterForm = () => {
     mutationFn: registerUser,
     onSuccess: (data) => {
       if (data.code === "OK") {
+        toast("회원가입에 성공했습니다!", {
+          closeButton: true,
+        });
         router.push("/");
       } else if (data.code === "EMAIL_DUPLICATE") {
+        toast("이미 사용중인 이메일입니다.", {
+          description: "다른 이메일을 사용해주세요.",
+          closeButton: true,
+        });
       } else {
+        toast("알 수 없는 서버 에러가 발생했습니다.", {
+          description: "잠시 후 다시 시도해주세요.",
+          closeButton: true,
+        });
       }
     },
-    onError: () => {},
+    onError: () => {
+      toast("알 수 없는 서버 에러가 발생했습니다.", {
+        description: "잠시 후 다시 시도해주세요.",
+        closeButton: true,
+      });
+    },
   });
 
   const onSubmit = ({
