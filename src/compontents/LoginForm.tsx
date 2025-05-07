@@ -11,6 +11,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
 import { emailLogin } from "@/actions/auth";
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 const loginSchema = z.object({
   email: z.string().email({ message: "부정확한 이메일 형식입니다." }),
@@ -32,20 +33,41 @@ const LoginForm = () => {
     mutationFn: emailLogin,
     onSuccess: (data) => {
       if (data.code === "OK") {
-        console.log("ok");
+        toast("로그인에 성공했습니다!", {
+          closeButton: true,
+        });
         router.push("/");
       } else if (data.code === "INCORRECT_PASSWORD") {
-        console.log("p");
+        toast("비밀번호가 틀렸습니다.", {
+          closeButton: true,
+        });
       } else if (data.code === "NO_USER") {
-        console.log("u");
+        toast("등록되지 않은 이메일입니다.", {
+          closeButton: true,
+        });
       } else if (data.code === "SOCIAL_USER") {
+        toast("소셜 회원가입한 계정입니다.", {
+          description: "소셜 회원가입한 서비스로 로그인해주세요.",
+          closeButton: true,
+        });
       } else if (data.code === "UNKOWN_ERROR") {
-        console.log("e");
+        toast("알 수 없는 서버 에러가 발생했습니다.", {
+          description: "잠시 후 다시 시도해주세요.",
+          closeButton: true,
+        });
       } else {
-        console.log("e");
+        toast("알 수 없는 서버 에러가 발생했습니다.", {
+          description: "잠시 후 다시 시도해주세요.",
+          closeButton: true,
+        });
       }
     },
-    onError: () => {},
+    onError: () => {
+      toast("알 수 없는 서버 에러가 발생했습니다.", {
+        description: "잠시 후 다시 시도해주세요.",
+        closeButton: true,
+      });
+    },
   });
 
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
