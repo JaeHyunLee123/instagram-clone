@@ -1,8 +1,10 @@
 "use server";
 
-import { createSession } from "@/lib/session";
+import { createSession, getSession } from "@/lib/session";
 import prisma from "@/lib/prisma";
 import bcrypt from "bcrypt";
+import { cookies } from "next/headers";
+import { SessionPayload } from "@/lib/definitions";
 
 interface RegisterData {
   email: string;
@@ -99,6 +101,44 @@ export async function emailLogin({
     });
 
     return { code: "OK" };
+  } catch (e) {
+    if (e instanceof Error) {
+      console.error(e.message);
+    } else {
+      console.error(e);
+    }
+
+    return { code: "UNKOWN_ERROR" };
+  }
+}
+
+type LOGOUT_CODE = "OK" | "UNKOWN_ERROR";
+export async function logout(): Promise<{ code: LOGOUT_CODE }> {
+  try {
+    const cookieStore = await cookies();
+    cookieStore.delete("session");
+
+    return { code: "OK" };
+  } catch (e) {
+    if (e instanceof Error) {
+      console.error(e.message);
+    } else {
+      console.error(e);
+    }
+
+    return { code: "UNKOWN_ERROR" };
+  }
+}
+
+type GET_SESSION_CLIENT_CODE = "OK" | "UNKOWN_ERROR";
+export async function getSessionClient(): Promise<{
+  code: GET_SESSION_CLIENT_CODE;
+  session?: SessionPayload | null;
+}> {
+  try {
+    const session = await getSession();
+
+    return { code: "OK", session };
   } catch (e) {
     if (e instanceof Error) {
       console.error(e.message);
