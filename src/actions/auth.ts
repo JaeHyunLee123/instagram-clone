@@ -1,9 +1,8 @@
 "use server";
 
-import { createSession, getSession } from "@/lib/session";
+import { createSession, deleteSession, getSession } from "@/lib/session";
 import prisma from "@/lib/prisma";
 import bcrypt from "bcrypt";
-import { cookies } from "next/headers";
 import { SessionPayload } from "@/lib/definitions";
 
 interface RegisterData {
@@ -115,8 +114,7 @@ export async function emailLogin({
 type LOGOUT_CODE = "OK" | "UNKOWN_ERROR";
 export async function logout(): Promise<{ code: LOGOUT_CODE }> {
   try {
-    const cookieStore = await cookies();
-    cookieStore.delete("session");
+    await deleteSession();
 
     return { code: "OK" };
   } catch (e) {

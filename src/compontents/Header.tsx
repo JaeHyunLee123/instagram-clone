@@ -6,13 +6,17 @@ import { faInstagram } from "@fortawesome/free-brands-svg-icons/faInstagram";
 import Link from "next/link";
 import Button from "./ui/Button";
 import { useQuery } from "@tanstack/react-query";
-import { getSessionClient } from "@/actions/auth";
+import { getSessionClient, logout } from "@/actions/auth";
+import { useRouter } from "next/navigation";
 
 export default function Header() {
   const { data, isPending } = useQuery({
     queryKey: ["sesssion"],
     queryFn: getSessionClient,
+    notifyOnChangeProps: "all",
   });
+
+  const router = useRouter();
 
   return (
     <header className="bg-white w-full flex items-center justify-center px-5 py-6">
@@ -33,12 +37,23 @@ export default function Header() {
         ) : data && data.session ? (
           <>
             <span>{`Hi, ${data.session.nickname}`}</span>
-            <Button>Logout</Button>
+            <Button
+              onClick={() => {
+                logout();
+                router.push("/");
+              }}
+            >
+              Logout
+            </Button>
           </>
         ) : (
           <>
-            <Button variants="outline">Register</Button>
-            <Button>Login</Button>
+            <Link href={"/register"}>
+              <Button variants="outline">Register</Button>
+            </Link>
+            <Link href={"/login"}>
+              <Button>Login</Button>
+            </Link>
           </>
         )}
       </div>
