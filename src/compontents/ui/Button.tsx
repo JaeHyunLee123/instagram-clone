@@ -9,6 +9,7 @@ export default function Button({
   className = "",
   children,
   variants = "default",
+  ...rest
 }: ButtonProps) {
   return (
     <button
@@ -19,6 +20,7 @@ export default function Button({
         variants === "outline" && "bg-white text-black hover:bg-neutral-100",
         className
       )}
+      {...rest}
     >
       {children}
     </button>
