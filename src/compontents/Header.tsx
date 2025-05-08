@@ -11,9 +11,8 @@ import { useRouter } from "next/navigation";
 
 export default function Header() {
   const { data, isPending } = useQuery({
-    queryKey: ["sesssion"],
+    queryKey: ["session"],
     queryFn: getSessionClient,
-    notifyOnChangeProps: "all",
   });
 
   const router = useRouter();
@@ -38,8 +37,10 @@ export default function Header() {
           <>
             <span>{`Hi, ${data.session.nickname}`}</span>
             <Button
-              onClick={() => {
-                logout();
+              onClick={async () => {
+                await logout();
+                // optimistic UI
+                data.session = null;
                 router.push("/");
               }}
             >
