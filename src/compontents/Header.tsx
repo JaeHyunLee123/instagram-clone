@@ -7,15 +7,36 @@ import Link from "next/link";
 import Button from "./ui/Button";
 import { useQuery } from "@tanstack/react-query";
 import { getSessionClient, logout } from "@/actions/auth";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import { useEffect, useReducer } from "react";
 
 export default function Header() {
-  const { data, isPending } = useQuery({
+  const router = useRouter();
+
+  const { data, isPending, refetch } = useQuery({
     queryKey: ["session"],
     queryFn: getSessionClient,
   });
 
-  const router = useRouter();
+  const [, forceUpdate] = useReducer((x) => x + 1, 0);
+
+  const pathname = usePathname();
+
+  useEffect(() => {
+    // This runs on every URL change
+    console.log(pathname);
+    refetch();
+    forceUpdate();
+  }, [pathname, refetch]);
+
+  const handleLogout = async () => {
+    await logout();
+
+    refetch();
+    forceUpdate();
+
+    router.push("/");
+  };
 
   return (
     <header className="bg-white w-full flex items-center justify-center px-5 py-6">
@@ -36,16 +57,7 @@ export default function Header() {
         ) : data && data.session ? (
           <>
             <span>{`Hi, ${data.session.nickname}`}</span>
-            <Button
-              onClick={async () => {
-                await logout();
-                // optimistic UI
-                data.session = null;
-                router.push("/");
-              }}
-            >
-              Logout
-            </Button>
+            <Button onClick={handleLogout}>Logout</Button>
           </>
         ) : (
           <>
