@@ -50,17 +50,17 @@ docker-compose up
 ### Prisma client code
 
 ```
-npx prisma generate
+docker compose exec npx prisma generate
 ```
 
 ### DB migrate(기존 npx prisma migrate 명령어)
 
 ```
-npm run prisma:migrate
+docker compose exec web npx prisma migrate dev --name init
 ```
 
 ### Prisma studio
 
 ```
-npm run prisma:studio
+docker compose exec web npx prisma studio
 ```
