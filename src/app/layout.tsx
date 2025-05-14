@@ -4,6 +4,7 @@ import "./globals.css";
 import Providers from "@/provider/Providers";
 import { Toaster } from "@/compontents/ui/Toaster";
 import Header from "@/compontents/Header";
+import Footer from "@/compontents/Footer";
 
 const notoSansKR = Noto_Sans_KR({
   subsets: ["latin", "latin-ext"],
@@ -27,6 +28,7 @@ export default function RootLayout({
         <Providers>
           <Header />
           <main>{children}</main>
+          <Footer />
           <Toaster />
         </Providers>
       </body>
