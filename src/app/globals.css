@@ -19,6 +19,14 @@
   );
 }
 
+.border-insta-gradiant {
+  background-image: linear-gradient(#fff, #fff),
+    linear-gradient(45deg, #facc15, #fb923c, #ec4899, #a855f7, #4f46e5);
+  border-color: transparent;
+  background-origin: border-box;
+  background-clip: content-box, border-box;
+}
+
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
