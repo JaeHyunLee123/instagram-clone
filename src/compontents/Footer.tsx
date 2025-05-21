@@ -13,7 +13,7 @@ export default function Footer() {
   const pathname = usePathname();
 
   return (
-    <footer className="flex items-center space-x-14 justify-center bg-white text-black absolute bottom-0 p-5 w-full">
+    <footer className="flex items-center space-x-14 justify-center bg-white text-black fixed bottom-0 p-5 w-full">
       <Link
         href="/"
         className={cn(
