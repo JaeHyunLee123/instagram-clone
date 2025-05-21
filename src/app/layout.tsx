@@ -27,7 +27,7 @@ export default function RootLayout({
       <body className={`${notoSansKR.className} antialiased`}>
         <Providers>
           <Header />
-          <main>{children}</main>
+          <main className="pt-[72px] py-[64px] ">{children}</main>
           <Footer />
           <Toaster />
         </Providers>
