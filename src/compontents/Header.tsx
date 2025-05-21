@@ -39,7 +39,7 @@ export default function Header() {
   };
 
   return (
-    <header className="bg-white w-full flex items-center justify-center px-5 py-6">
+    <header className="bg-white w-full flex items-center justify-center px-5 py-6 fixed top-0">
       <span className="text-black font-bold text-2xl inline-block w-[33%]">
         Instagram
       </span>
