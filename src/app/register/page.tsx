@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export default function Register() {
   return (
-    <div className="flex flex-col items-center justify-center  space-y-5 p-10 w-full h-screen bg-insta-gradiant">
+    <div className="flex flex-col items-center justify-center  space-y-5 p-10 w-full h-full bg-insta-gradiant">
       <h1 className="text-white text-4xl font-bold">Instagram Clone</h1>
       <RegisterForm />
       <span className="text-white">or</span>
