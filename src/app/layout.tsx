@@ -1,15 +1,15 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Noto_Sans_KR } from "next/font/google";
 import "./globals.css";
+import Providers from "@/provider/Providers";
+import { Toaster } from "@/compontents/ui/Toaster";
+import Header from "@/compontents/Header";
+import Footer from "@/compontents/Footer";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+const notoSansKR = Noto_Sans_KR({
+  subsets: ["latin", "latin-ext"],
+  weight: ["400", "500", "600", "700", "800"],
+  style: ["normal"],
 });
 
 export const metadata: Metadata = {
@@ -23,11 +23,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
+    <html lang="ko">
+      <body className={`${notoSansKR.className} antialiased`}>
+        <Providers>
+          <Header />
+          <main className="pt-[96px] pb-[84px] h-screen">{children}</main>
+          <Footer />
+          <Toaster />
+        </Providers>
       </body>
     </html>
   );
