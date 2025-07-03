@@ -139,6 +139,8 @@ export default function PostForm() {
             aspect={1}
             className="w-[400px] h-[400px]"
           >
+            {/* Cannot use NextJS's Image with react image crop  */}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               ref={imgRef}
               alt="image-preview"
