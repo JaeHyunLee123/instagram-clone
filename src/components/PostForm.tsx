@@ -126,7 +126,7 @@ export default function PostForm() {
             >
               다시 자르기
             </Button>
-            <Button variants="outline" onClick={handleReset}>
+            <Button variants="default" onClick={handleReset}>
               다른 사진 업로드
             </Button>
           </div>

@@ -1,5 +1,5 @@
-import RegisterForm from "@/compontents/RegisterForm";
-import SocialMediaLoginButton from "@/compontents/ui/SocialMediaLoginButton";
+import RegisterForm from "@/components/RegisterForm";
+import SocialMediaLoginButton from "@/components/ui/SocialMediaLoginButton";
 import Link from "next/link";
 
 export default function Register() {

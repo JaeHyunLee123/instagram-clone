@@ -1,5 +1,5 @@
-import LoginForm from "@/compontents/LoginForm";
-import SocialMediaLoginButton from "@/compontents/ui/SocialMediaLoginButton";
+import LoginForm from "@/components/LoginForm";
+import SocialMediaLoginButton from "@/components/ui/SocialMediaLoginButton";
 import Link from "next/link";
 
 export default function Login() {
