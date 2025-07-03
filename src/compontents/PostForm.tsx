@@ -137,7 +137,7 @@ export default function PostForm() {
             crop={crop}
             onChange={(c) => setCrop(c)}
             aspect={1}
-            className="w-[400px] h-[400px]"
+            className="w-[400px] "
           >
             {/* Cannot use NextJS's Image with react image crop  */}
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -146,7 +146,7 @@ export default function PostForm() {
               alt="image-preview"
               src={imagePreview}
               onLoad={onImageLoad}
-              className="rounded w-[400px] h-[400px] object-cover object-center"
+              className="rounded w-[400px] object-cover object-center"
             />
           </ReactCrop>
           <div className="flex justify-center items-center space-x-0.5">
